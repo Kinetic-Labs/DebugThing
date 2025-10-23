@@ -3,15 +3,25 @@
 
 int main() {
     stdio_init_all();
-
-    if(cyw43_arch_init())
+ 
+    if(cyw43_arch_init()) {
+        printf("Failed to initialize cyw43_arch\n");
         return -1;
+    }
 
+    printf("Starting DebugThing...\n");
+
+    int count = 0;
     while(true) {
         cyw43_arch_gpio_put(CYW43_WL_GPIO_LED_PIN, 1);
+        printf("LED ON - iteration %d\n", count);
         sleep_ms(500);
 
         cyw43_arch_gpio_put(CYW43_WL_GPIO_LED_PIN, 0);
+        printf("LED OFF - iteration %d\n", count);
         sleep_ms(500);
+        
+        count++;
     }
 }
+
