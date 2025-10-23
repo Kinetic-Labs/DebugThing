@@ -32,6 +32,7 @@
             gcc-arm-embedded
             picotool
             python3
+            git
           ];
 
           shellHook = ''
