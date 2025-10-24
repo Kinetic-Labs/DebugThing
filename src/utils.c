@@ -4,7 +4,7 @@
 
 #define CONVERSION_FACTOR (3.3f / (1 << 12))
 
-void print_banner(void) {
+const void print_banner(void) {
     printf("\n");
     printf("                     ,----, \n");
     printf("                   ,/   .`| \n");
@@ -24,7 +24,7 @@ void print_banner(void) {
     printf("\n");
 }
 
-bool init_hardware(void) {
+const bool init_hardware(void) {
     if(cyw43_arch_init()) {
         printf("Failed to initialize cyw43_arch\n");
         return false;
@@ -39,39 +39,41 @@ bool init_hardware(void) {
     return true;
 }
 
-float read_adc_voltage(uint8_t input) {
+const float read_adc_voltage(const uint8_t input) {
     adc_select_input(input);
+
     uint16_t raw = adc_read();
+
     return raw * CONVERSION_FACTOR;
 }
 
-float read_temperature(void) {
+const float read_temperature(void) {
     adc_select_input(4);
 
-    uint16_t raw = adc_read();
-    float voltage = raw * CONVERSION_FACTOR;
+    const uint16_t raw = adc_read();
+    const float voltage = raw * CONVERSION_FACTOR;
 
     return 27.0f - (voltage - 0.706f) / 0.001721f;
 }
 
-void print_readings(int count) {
-    printf("\n--- Reading %d ---\n", count);
+const void print_readings(const int count) {
+    const float temp = read_temperature();
 
-    float v0 = read_adc_voltage(0);
-    printf("  PROB 1 (ADC0): %.3fV\n", v0);
+    printf("\n");
+    printf("++++++++++++++++++++++++++++++++++++++\n");
+    printf("++ Analog Input Reading (%d)\n", count);
+    printf("[CPU Temperature: %.1f°C]\n", temp);
 
-    float v1 = read_adc_voltage(1);
-    printf("  PROB 2 (ADC1): %.3fV\n", v1);
+    const float v0 = read_adc_voltage(0);
+    printf("  PROB 1: %.3fV\n", v0);
 
-    float v2 = read_adc_voltage(2);
-    printf("  PROB 3 (ADC2): %.3fV\n", v2);
+    const float v1 = read_adc_voltage(1);
+    printf("  PROB 2: %.3fV\n", v1);
 
-    float temp = read_temperature();
-    printf("  CPU Temperature: %.1f°C\n", temp);
-
-    printf("----------------------------------------\n");
+    const float v2 = read_adc_voltage(2);
+    printf("  PROB 3: %.3fV\n", v2);
 }
 
-void set_led(bool state) {
+const void set_led(bool state) {
     cyw43_arch_gpio_put(CYW43_WL_GPIO_LED_PIN, state ? 1 : 0);
 }

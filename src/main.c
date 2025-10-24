@@ -3,20 +3,22 @@
 #include "hardware/adc.h"
 
 #define CONVERSION_FACTOR (3.3f / (1 << 12))
+#define POLLING_RATE 50
 
-void print_banner(void);
-bool init_hardware(void);
-float read_adc_voltage(uint8_t input);
-float read_temperature(void);
-void print_readings(int count);
-void set_led(bool state);
+const void print_banner(void);
+const bool init_hardware(void);
+const float read_adc_voltage(const uint8_t input);
+const float read_temperature(void);
+const void print_readings(const int count);
+const void set_led(const bool state);
 
-int main(void) {
+const int main(void) {
     stdio_init_all();
 
     if(!init_hardware())
         return -1;
 
+    // allow for serial to connect before reading
     sleep_ms(2000);
     print_banner();
 
@@ -25,11 +27,13 @@ int main(void) {
     while(true) {
         set_led(true);
         print_readings(count);
-        sleep_ms(500);
+
+        sleep_ms(POLLING_RATE / 2);
         set_led(false);
-        sleep_ms(500);
+        sleep_ms(POLLING_RATE / 2);
 
         count++;
     }
+
     return 0;
 }
