@@ -19,4 +19,6 @@ Any voltage above has the potential to damage the Pico's hardware.
 - [ ] Reference voltage verification
 - [ ] Clock signal verification
 - [ ] Jitter measurement
-- [ ] Arduino support is not planned nor is STM support
+
+
+> Arduino support is not planned nor is STM support
