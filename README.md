@@ -15,6 +15,7 @@ Any voltage above has the potential to damage the Pico's hardware.
 ## Roadmap
 - [x] Pico Support
 - [ ] ESP32 Support
+- [x] Voltage measurement
 - [ ] Voltage Drop detection
 - [ ] Reference voltage verification
 - [ ] Clock signal verification
