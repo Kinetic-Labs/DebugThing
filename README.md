@@ -15,8 +15,8 @@ Any voltage above has the potential to damage the Pico's hardware.
 ## Roadmap
 - [x] Pico Support
 - [ ] ESP32 Support
-- Voltage Drop detection
-- Reference voltage verification
-- Clock signal verification
-- Jitter measurement
-- Arduino support is not planned nor is STM support
+- [ ] Voltage Drop detection
+- [ ] Reference voltage verification
+- [ ] Clock signal verification
+- [ ] Jitter measurement
+- [ ] Arduino support is not planned nor is STM support
