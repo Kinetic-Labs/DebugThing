@@ -3,8 +3,8 @@
 ## Setup
 Aquire a Raspberry Pi Pico (2W/W(H))
 
-Attach wires to GPIO26_A0 and GPIO27_AGND or attach
-more probes attach wires to GPIO27_A1 and GPIO28_A2
+Attach wires to `GPIO26_A0` and `GPIO27_AGND` or attach
+more probes attach wires to `GPIO27_A1` and `GPIO28_A2`
 
 then prob voltages 3.3v or lower as specified by the Pico family.
 
